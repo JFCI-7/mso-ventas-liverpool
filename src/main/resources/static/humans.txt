@@ -1,0 +1,9 @@
+/* TEAM */
+  Developer: Tu Nombre / @tu_usuario
+  Contact: tu_correo@liverpool.com.mx
+  Location: Ciudad de México, México.
+
+/* SITE */
+  Last update: 2026/02/27
+  Language: Spanish / Java 21
+  Software: Spring Boot v4.0.3, Springdoc OpenAPI
