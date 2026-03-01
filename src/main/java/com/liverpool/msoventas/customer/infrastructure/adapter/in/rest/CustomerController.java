@@ -8,8 +8,8 @@ import com.liverpool.msoventas.customer.domain.port.in.UpdateCustomerUseCase;
 import com.liverpool.msoventas.customer.infrastructure.adapter.in.rest.dto.CreateCustomerRequest;
 import com.liverpool.msoventas.customer.infrastructure.adapter.in.rest.dto.CustomerResponse;
 import com.liverpool.msoventas.customer.infrastructure.adapter.in.rest.dto.UpdateCustomerRequest;
-import com.liverpool.msoventas.shared.domian.model.ErrorType;
-import com.liverpool.msoventas.shared.domian.model.Result;
+import com.liverpool.msoventas.shared.domain.model.ErrorType;
+import com.liverpool.msoventas.shared.domain.model.Result;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

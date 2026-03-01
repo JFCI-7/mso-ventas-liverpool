@@ -3,7 +3,7 @@ package com.liverpool.msoventas.customer.domain.port.in;
 import java.util.List;
 
 import com.liverpool.msoventas.customer.domain.model.Customer;
-import com.liverpool.msoventas.shared.domian.model.Result;
+import com.liverpool.msoventas.shared.domain.model.Result;
 
 public interface GetCustomerUseCase {
 	

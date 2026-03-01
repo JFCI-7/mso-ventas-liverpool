@@ -9,8 +9,8 @@ import com.liverpool.msoventas.customer.domain.port.in.DeleteCustomerUseCase;
 import com.liverpool.msoventas.customer.domain.port.in.GetCustomerUseCase;
 import com.liverpool.msoventas.customer.domain.port.in.UpdateCustomerUseCase;
 import com.liverpool.msoventas.customer.domain.port.out.CustomerRepositoryPort;
-import com.liverpool.msoventas.shared.domian.model.ErrorType;
-import com.liverpool.msoventas.shared.domian.model.Result;
+import com.liverpool.msoventas.shared.domain.model.ErrorType;
+import com.liverpool.msoventas.shared.domain.model.Result;
 import com.liverpool.msoventas.customer.domain.model.Customer;
 
 import lombok.RequiredArgsConstructor;

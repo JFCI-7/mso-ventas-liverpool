@@ -1,4 +1,4 @@
-package com.liverpool.msoventas.shared.domian.model;
+package com.liverpool.msoventas.shared.domain.model;
 
 import lombok.Getter;
 
