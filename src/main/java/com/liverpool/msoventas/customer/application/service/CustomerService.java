@@ -1,0 +1,67 @@
+package com.liverpool.msoventas.customer.application.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.liverpool.msoventas.customer.domain.port.in.CreateCustomerUseCase;
+import com.liverpool.msoventas.customer.domain.port.in.DeleteCustomerUseCase;
+import com.liverpool.msoventas.customer.domain.port.in.GetCustomerUseCase;
+import com.liverpool.msoventas.customer.domain.port.in.UpdateCustomerUseCase;
+import com.liverpool.msoventas.customer.domain.port.out.CustomerRepositoryPort;
+import com.liverpool.msoventas.shared.domian.model.ErrorType;
+import com.liverpool.msoventas.shared.domian.model.Result;
+import com.liverpool.msoventas.customer.domain.model.Customer;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+public class CustomerService implements  CreateCustomerUseCase, GetCustomerUseCase,
+UpdateCustomerUseCase, DeleteCustomerUseCase {
+	
+	private final CustomerRepositoryPort repositoryPort;
+	
+	@Override
+    public Result<Customer> create(Customer customer) {
+        Customer saved = repositoryPort.save(customer);
+        return Result.success(saved);
+    }
+
+    @Override
+    public Result<Customer> findById(String id) {
+        return repositoryPort.findById(id)
+                .map(Result::success)
+                .orElse(Result.failure("Cliente no encontrado con id: " + id, ErrorType.NOT_FOUND));
+    }
+
+    @Override
+    public Result<List<Customer>> findAll() {
+        List<Customer> customers = repositoryPort.findAll();
+        return Result.success(customers);
+    }
+
+    @Override
+    public Result<Customer> update(String id, Customer customer) {
+        if (!repositoryPort.existsById(id)) {
+            return Result.failure("Cliente no encontrado con id: " + id, ErrorType.NOT_FOUND);
+        }
+        Customer updated = Customer.builder()
+                .id(id)
+                .firstName(customer.getFirstName())
+                .lastName(customer.getLastName())
+                .motherLastName(customer.getMotherLastName())
+                .email(customer.getEmail())
+                .build();
+        return Result.success(repositoryPort.save(updated));
+    }
+
+    @Override
+    public Result<Void> deleteById(String id) {
+        if (!repositoryPort.existsById(id)) {
+            return Result.failure("Cliente no encontrado con id: " + id, ErrorType.NOT_FOUND);
+        }
+        repositoryPort.deleteById(id);
+        return Result.success(null);
+    }
+
+}
