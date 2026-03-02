@@ -1,6 +1,7 @@
 package com.liverpool.msoventas.customer.application.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.liverpool.msoventas.customer.domain.port.in.CreateCustomerUseCase;
 import com.liverpool.msoventas.customer.domain.port.in.DeleteCustomerUseCase;
@@ -29,6 +30,10 @@ UpdateCustomerUseCase, DeleteCustomerUseCase {
 
     @Override
     public Result<Customer> create(Customer customer) {
+        if (repositoryPort.existsByEmail(customer.getEmail())) {
+            return Result.failure(
+                "El email ya esta registrado: " + customer.getEmail(), ErrorType.CONFLICT);
+        }
         Customer saved = repositoryPort.save(customer);
         return Result.success(saved);
     }
@@ -48,8 +53,14 @@ UpdateCustomerUseCase, DeleteCustomerUseCase {
 
     @Override
     public Result<Customer> update(String id, Customer customer) {
-        if (!repositoryPort.existsById(id)) {
+        Optional<Customer> existing = repositoryPort.findById(id);
+        if (existing.isEmpty()) {
             return Result.failure("Cliente no encontrado con id: " + id, ErrorType.NOT_FOUND);
+        }
+        boolean emailChanged = !existing.get().getEmail().equals(customer.getEmail());
+        if (emailChanged && repositoryPort.existsByEmail(customer.getEmail())) {
+            return Result.failure(
+                "El email ya esta registrado: " + customer.getEmail(), ErrorType.CONFLICT);
         }
         Customer updated = Customer.builder()
                 .id(id)

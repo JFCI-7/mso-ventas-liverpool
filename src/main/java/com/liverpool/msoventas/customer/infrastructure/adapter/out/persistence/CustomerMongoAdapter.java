@@ -50,6 +50,11 @@ public class CustomerMongoAdapter implements CustomerRepositoryPort {
     }
 
     @Override
+    public boolean existsByEmail(String email) {
+        return repository.existsByEmail(email);
+    }
+
+    @Override
     public void deleteById(String id) {
         repository.deleteById(id);
     }

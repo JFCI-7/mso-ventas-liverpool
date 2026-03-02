@@ -49,13 +49,27 @@ class CustomerServiceTest {
     @Test
     @DisplayName("create: debe retornar Result exitoso con el cliente guardado")
     void create_shouldReturnSuccess_whenCustomerIsSaved() {
+        when(repositoryPort.existsByEmail(customer.getEmail())).thenReturn(false);
         when(repositoryPort.save(any(Customer.class))).thenReturn(customer);
 
         Result<Customer> result = customerService.create(customer);
 
         assertThat(result.isSuccess()).isTrue();
         assertThat(result.getData().getFirstName()).isEqualTo("Juan");
+        verify(repositoryPort, times(1)).existsByEmail(customer.getEmail());
         verify(repositoryPort, times(1)).save(any(Customer.class));
+    }
+
+    @Test
+    @DisplayName("create: debe retornar CONFLICT cuando el email ya esta registrado")
+    void create_shouldReturnConflict_whenEmailAlreadyExists() {
+        when(repositoryPort.existsByEmail(customer.getEmail())).thenReturn(true);
+
+        Result<Customer> result = customerService.create(customer);
+
+        assertThat(result.isFailure()).isTrue();
+        assertThat(result.getErrorType()).isEqualTo(ErrorType.CONFLICT);
+        verify(repositoryPort, never()).save(any(Customer.class));
     }
 
     // ── FIND BY ID ────────────────────────────────────────────
@@ -119,26 +133,47 @@ class CustomerServiceTest {
                 .email("carlos.lopez@email.com")
                 .build();
 
-        when(repositoryPort.existsById("abc123")).thenReturn(true);
+        // customer (setUp) tiene email "juan.perez@email.com"; se actualiza con el mismo email
+        when(repositoryPort.findById("abc123")).thenReturn(Optional.of(customer));
         when(repositoryPort.save(any(Customer.class))).thenReturn(updated);
 
         Result<Customer> result = customerService.update("abc123", customer);
 
         assertThat(result.isSuccess()).isTrue();
         assertThat(result.getData().getFirstName()).isEqualTo("Carlos");
-        verify(repositoryPort, times(1)).existsById("abc123");
+        verify(repositoryPort, times(1)).findById("abc123");
         verify(repositoryPort, times(1)).save(any(Customer.class));
     }
 
     @Test
     @DisplayName("update: debe retornar NOT_FOUND cuando el cliente no existe")
     void update_shouldReturnNotFound_whenCustomerDoesNotExist() {
-        when(repositoryPort.existsById("notexist")).thenReturn(false);
+        when(repositoryPort.findById("notexist")).thenReturn(Optional.empty());
 
         Result<Customer> result = customerService.update("notexist", customer);
 
         assertThat(result.isFailure()).isTrue();
         assertThat(result.getErrorType()).isEqualTo(ErrorType.NOT_FOUND);
+        verify(repositoryPort, never()).save(any(Customer.class));
+    }
+
+    @Test
+    @DisplayName("update: debe retornar CONFLICT cuando el nuevo email ya esta registrado por otro cliente")
+    void update_shouldReturnConflict_whenNewEmailIsAlreadyUsed() {
+        Customer requestWithNewEmail = Customer.builder()
+                .firstName("Juan")
+                .lastName("Perez")
+                .motherLastName("Garcia")
+                .email("otro.email@email.com")
+                .build();
+
+        when(repositoryPort.findById("abc123")).thenReturn(Optional.of(customer));
+        when(repositoryPort.existsByEmail("otro.email@email.com")).thenReturn(true);
+
+        Result<Customer> result = customerService.update("abc123", requestWithNewEmail);
+
+        assertThat(result.isFailure()).isTrue();
+        assertThat(result.getErrorType()).isEqualTo(ErrorType.CONFLICT);
         verify(repositoryPort, never()).save(any(Customer.class));
     }
 

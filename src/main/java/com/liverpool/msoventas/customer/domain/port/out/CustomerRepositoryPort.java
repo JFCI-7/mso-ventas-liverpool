@@ -46,6 +46,14 @@ public interface CustomerRepositoryPort {
     boolean existsById(String id);
 
     /**
+     * Verifica si existe un cliente con el correo electronico dado.
+     *
+     * @param email correo electronico a verificar
+     * @return {@code true} si el email ya esta registrado
+     */
+    boolean existsByEmail(String email);
+
+    /**
      * Elimina el cliente con el identificador dado.
      *
      * @param id identificador del cliente a eliminar
