@@ -12,6 +12,7 @@ import com.liverpool.msoventas.order.infrastructure.adapter.in.rest.dto.UpdateOr
 import com.liverpool.msoventas.shared.domain.model.ErrorType;
 import com.liverpool.msoventas.shared.domain.model.Result;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -42,6 +43,9 @@ public class OrderController {
 
     @PostMapping
     @Operation(summary = "Crear pedido")
+    @ApiResponse(responseCode = "201", description = "Pedido creado exitosamente")
+    @ApiResponse(responseCode = "400", description = "Datos de entrada invalidos")
+    @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     public ResponseEntity<?> create(@Valid @RequestBody CreateOrderRequest request) {
         List<OrderItem> items = request.getItems().stream()
                 .map(item -> OrderItem.builder()
@@ -70,6 +74,8 @@ public class OrderController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Obtener pedido por ID")
+    @ApiResponse(responseCode = "200", description = "Pedido encontrado")
+    @ApiResponse(responseCode = "404", description = "Pedido no encontrado")
     public ResponseEntity<?> findById(@PathVariable String id) {
         Result<Order> result = getOrderUseCase.findById(id);
         if (result.isFailure()) {
@@ -80,7 +86,9 @@ public class OrderController {
     }
 
     @GetMapping
-    @Operation(summary = "Listar pedidos o buscar por displayName")
+    @Operation(summary = "Listar pedidos o buscar por displayName",
+               description = "Si se provee 'displayName', filtra pedidos cuyos articulos contengan ese nombre (busqueda flexible). Si no, retorna todos los pedidos.")
+    @ApiResponse(responseCode = "200", description = "Lista de pedidos obtenida exitosamente")
     public ResponseEntity<?> findOrders(
             @RequestParam(required = false) String displayName) {
 
@@ -100,6 +108,9 @@ public class OrderController {
 
     @PatchMapping("/{id}/status")
     @Operation(summary = "Actualizar estatus del pedido")
+    @ApiResponse(responseCode = "200", description = "Estatus actualizado exitosamente")
+    @ApiResponse(responseCode = "400", description = "Estatus invalido o ausente")
+    @ApiResponse(responseCode = "404", description = "Pedido no encontrado")
     public ResponseEntity<?> updateStatus(@PathVariable String id,
                                           @Valid @RequestBody UpdateOrderStatusRequest request) {
         Result<Order> result = updateOrderUseCase.updateStatus(id, request.getStatus());
@@ -112,6 +123,8 @@ public class OrderController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar pedido")
+    @ApiResponse(responseCode = "204", description = "Pedido eliminado exitosamente")
+    @ApiResponse(responseCode = "404", description = "Pedido no encontrado")
     public ResponseEntity<?> deleteById(@PathVariable String id) {
         Result<Void> result = deleteOrderUseCase.deleteById(id);
         if (result.isFailure()) {

@@ -12,6 +12,7 @@ import com.liverpool.msoventas.shared.domain.model.ErrorType;
 import com.liverpool.msoventas.shared.domain.model.Result;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +45,10 @@ public class CustomerController {
     
     @PostMapping
     @Operation(summary = "Crear un nuevo cliente")
+    @ApiResponse(responseCode = "201", description = "Cliente creado exitosamente")
+    @ApiResponse(responseCode = "400", description = "Datos de entrada invalidos")
+    @ApiResponse(responseCode = "409", description = "El email ya esta registrado")
+    @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     public ResponseEntity<?> create(@Valid @RequestBody CreateCustomerRequest request) {
         Customer customer = Customer.builder()
                 .firstName(request.getFirstName())
@@ -65,6 +70,9 @@ public class CustomerController {
     
     @GetMapping("/{id}")
     @Operation(summary = "Obtener cliente por ID")
+    @ApiResponse(responseCode = "200", description = "Cliente encontrado")
+    @ApiResponse(responseCode = "400", description = "Error de validacion")
+    @ApiResponse(responseCode = "404", description = "Cliente no encontrado")
     public ResponseEntity<?> findById(@PathVariable String id) {
         Result<Customer> result = getCustomerUseCase.findById(id);
 
@@ -78,6 +86,7 @@ public class CustomerController {
 
     @GetMapping
     @Operation(summary = "Obtener todos los clientes")
+    @ApiResponse(responseCode = "200", description = "Lista de clientes obtenida exitosamente")
     public ResponseEntity<List<CustomerResponse>> findAll() {
         Result<List<Customer>> result = getCustomerUseCase.findAll();
 
@@ -90,6 +99,9 @@ public class CustomerController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar un cliente")
+    @ApiResponse(responseCode = "200", description = "Cliente actualizado exitosamente")
+    @ApiResponse(responseCode = "400", description = "Datos de entrada invalidos")
+    @ApiResponse(responseCode = "404", description = "Cliente no encontrado")
     public ResponseEntity<?> update(@PathVariable String id,
                                     @Valid @RequestBody UpdateCustomerRequest request) {
         Customer customer = Customer.builder()
@@ -111,6 +123,8 @@ public class CustomerController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar un cliente")
+    @ApiResponse(responseCode = "204", description = "Cliente eliminado exitosamente")
+    @ApiResponse(responseCode = "404", description = "Cliente no encontrado")
     public ResponseEntity<?> deleteById(@PathVariable String id) {
         Result<Void> result = deleteCustomerUseCase.deleteById(id);
 

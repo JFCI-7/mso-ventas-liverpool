@@ -1,6 +1,7 @@
 package com.liverpool.msoventas.delivery.infrastructure.adapter.in.rest.dto;
 
 import com.liverpool.msoventas.delivery.domain.model.Delivery;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -15,14 +16,31 @@ import lombok.Getter;
 @Builder
 public class DeliveryResponse {
 
+    @Schema(description = "Identificador unico de la direccion", example = "deliv_001")
     private String id;
+
+    @Schema(description = "ID del cliente propietario", example = "cust_001")
     private String customerId;
+
+    @Schema(description = "Nombre descriptivo de la direccion", example = "Casa")
     private String alias;
+
+    @Schema(description = "Calle y numero", example = "Av. Insurgentes Sur 1234")
     private String street;
+
+    @Schema(description = "Colonia o fraccionamiento", example = "Del Valle")
     private String colony;
+
+    @Schema(description = "Ciudad", example = "Ciudad de Mexico")
     private String city;
+
+    @Schema(description = "Estado o entidad federativa", example = "CDMX")
     private String state;
+
+    @Schema(description = "Codigo postal", example = "03100")
     private String zipCode;
+
+    @Schema(description = "Pais", example = "Mexico")
     private String country;
 
     public static DeliveryResponse fromDomain(Delivery delivery) {
