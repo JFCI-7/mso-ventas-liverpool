@@ -17,8 +17,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Delivery {
-	
-	private String id;
+
+    private String id;
     private String customerId;
     private String alias;
     private String street;

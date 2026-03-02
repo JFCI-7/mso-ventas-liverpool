@@ -14,7 +14,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class CustomerResponse {
-	
+
     @Schema(description = "Identificador unico del cliente", example = "abc123")
     private String id;
 

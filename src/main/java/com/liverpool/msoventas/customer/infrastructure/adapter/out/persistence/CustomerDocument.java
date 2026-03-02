@@ -21,8 +21,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Document(collection = "customers")
 public class CustomerDocument {
-	
-	@Id
+
+    @Id
     private String id;
 
     private String firstName;

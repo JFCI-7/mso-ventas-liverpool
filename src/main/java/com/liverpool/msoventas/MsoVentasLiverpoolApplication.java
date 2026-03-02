@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MsoVentasLiverpoolApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MsoVentasLiverpoolApplication.class, args);
-	}
-	
-	@GetMapping
-	public String testMso() {
-		return "Recurso de prueba - Vebtas Liberpool";
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MsoVentasLiverpoolApplication.class, args);
+    }
+
+    @GetMapping
+    public String testMso() {
+        return "Recurso de prueba - Vebtas Liberpool";
+    }
 
 }

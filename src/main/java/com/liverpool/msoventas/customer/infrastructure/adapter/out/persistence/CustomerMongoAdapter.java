@@ -21,8 +21,8 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class CustomerMongoAdapter implements CustomerRepositoryPort {
-	
-	private final SpringDataCustomerRepository repository;
+
+    private final SpringDataCustomerRepository repository;
 
     @Override
     public Customer save(Customer customer) {

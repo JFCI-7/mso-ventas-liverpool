@@ -66,7 +66,9 @@ public class OrderMongoAdapter implements OrderRepositoryPort {
     // ── Normalización ─────────────────────────────────────────
 
     private String normalize(String input) {
-        if (input == null) return "";
+        if (input == null) {
+            return "";
+        }
         String lower = input.toLowerCase();
         String noAccents = Normalizer.normalize(lower, Normalizer.Form.NFD)
                 .replaceAll("\\p{InCombiningDiacriticalMarks}+", "");

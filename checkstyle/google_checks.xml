@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+    "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+    "https://checkstyle.org/dtds/configuration_1_3.dtd">
+<!--
+    Reglas de estilo basadas en Google Java Style Guide.
+    Referencia: https://google.github.io/styleguide/javaguide.html
+-->
+<module name="Checker">
+
+    <!-- Codificacion del archivo fuente -->
+    <property name="charset" value="UTF-8"/>
+
+    <!-- Nivel de severidad: error detiene el build, warning solo avisa -->
+    <property name="severity" value="error"/>
+
+    <!-- Extensiones de archivos que se revisan -->
+    <property name="fileExtensions" value="java"/>
+
+    <!-- ══════════════════════════════════════════════════════
+         REGLAS A NIVEL DE ARCHIVO (fuera de TreeWalker)
+         Estas reglas analizan el archivo completo, no el AST
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- El archivo debe terminar con una linea nueva -->
+    <module name="NewlineAtEndOfFile"/>
+
+    <!-- No se permiten tabs; solo espacios -->
+    <module name="FileTabCharacter">
+        <property name="eachLine" value="true"/>
+    </module>
+
+    <!-- Longitud maxima de linea: 120 caracteres -->
+    <module name="LineLength">
+        <property name="fileExtensions" value="java"/>
+        <property name="max" value="120"/>
+        <!-- Excepcion: lineas que solo tienen un import o un Javadoc con URL -->
+        <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
+    </module>
+
+    <!-- ══════════════════════════════════════════════════════
+         REGLAS A NIVEL DE ARBOL (TreeWalker)
+         Estas reglas analizan la estructura del codigo Java
+         ══════════════════════════════════════════════════════ -->
+    <module name="TreeWalker">
+
+        <!-- ── IMPORTS ──────────────────────────────────────
+             Controla como se declaran los imports
+             ─────────────────────────────────────────────── -->
+
+        <!-- Prohibe imports comodin: import java.util.*; -->
+        <module name="AvoidStarImport"/>
+
+        <!-- Prohibe imports de paquetes internos de Java: sun.* -->
+        <module name="IllegalImport"/>
+
+        <!-- Detecta imports que no se usan en el codigo -->
+        <module name="UnusedImports"/>
+
+        <!-- ── NOMENCLATURA ──────────────────────────────────
+             Verifica que los nombres sigan las convenciones
+             ─────────────────────────────────────────────── -->
+
+        <!-- Paquetes: minusculas, sin guiones bajos: com.liverpool.msoventas -->
+        <module name="PackageName">
+            <property name="format" value="^[a-z]+(\.[a-z][a-z0-9]*)*$"/>
+        </module>
+
+        <!-- Clases e interfaces: UpperCamelCase: CustomerService -->
+        <module name="TypeName"/>
+
+        <!-- Metodos: lowerCamelCase: findById, createCustomer -->
+        <module name="MethodName"/>
+
+        <!-- Variables de instancia: lowerCamelCase: firstName, repositoryPort -->
+        <module name="MemberName"/>
+
+        <!-- Variables locales: lowerCamelCase -->
+        <module name="LocalVariableName"/>
+
+        <!-- Parametros: lowerCamelCase -->
+        <module name="ParameterName"/>
+
+        <!-- Constantes (static final): UPPER_SNAKE_CASE: MAX_RETRIES -->
+        <module name="ConstantName"/>
+
+        <!-- ── LLAVES Y BLOQUES ──────────────────────────────
+             Controla el uso de llaves en estructuras de control
+             ─────────────────────────────────────────────── -->
+
+        <!-- Siempre se requieren llaves en if, else, for, while, do -->
+        <module name="NeedBraces"/>
+
+        <!-- La llave de apertura { va al final de la misma linea -->
+        <module name="LeftCurly"/>
+
+        <!-- La llave de cierre } va en su propia linea -->
+        <module name="RightCurly"/>
+
+        <!-- No se permiten bloques vacios: if (x) {} -->
+        <module name="EmptyBlock"/>
+
+        <!-- ── ESPACIOS EN BLANCO ────────────────────────────
+             Controla los espacios alrededor de operadores y tokens
+             ─────────────────────────────────────────────── -->
+
+        <!-- Espacio despues de comas: f(a, b) no f(a,b) -->
+        <module name="WhitespaceAfter">
+            <property name="tokens" value="COMMA, SEMI"/>
+        </module>
+
+        <!-- No espacio antes de punto y coma ni de coma: f(a ,b) prohibido -->
+        <module name="NoWhitespaceBefore">
+            <property name="tokens" value="COMMA, SEMI"/>
+        </module>
+
+        <!-- Espacios alrededor de operadores: a = b, no a=b -->
+        <module name="WhitespaceAround">
+            <property name="allowEmptyConstructors" value="true"/>
+            <property name="allowEmptyMethods" value="true"/>
+            <property name="allowEmptyTypes" value="true"/>
+            <property name="allowEmptyLoops" value="true"/>
+        </module>
+
+        <!-- Una sola instruccion por linea -->
+        <module name="OneStatementPerLine"/>
+
+        <!-- ── MODIFICADORES ────────────────────────────────
+             Orden correcto de los modificadores Java
+             ─────────────────────────────────────────────── -->
+
+        <!-- Orden: public protected private abstract static final transient volatile -->
+        <module name="ModifierOrder"/>
+
+        <!-- No se permiten modificadores redundantes en interfaces -->
+        <module name="RedundantModifier"/>
+
+        <!-- ── PROBLEMAS COMUNES ─────────────────────────────
+             Detecta patrones que generan bugs o codigo confuso
+             ─────────────────────────────────────────────── -->
+
+        <!-- Detecta literales booleanos innecesarios: if (x == true) -->
+        <module name="SimplifyBooleanExpression"/>
+
+        <!-- Detecta retornos booleanos innecesarios: return x == true -->
+        <module name="SimplifyBooleanReturn"/>
+
+        <!-- Detecta uso de == con Strings en lugar de .equals() -->
+        <module name="StringLiteralEquality"/>
+
+        <!-- No permite declarar variables del mismo tipo en la misma linea -->
+        <module name="MultipleVariableDeclarations"/>
+
+        <!-- ── MISCELANEO ─────────────────────────────────────
+             Reglas de formato general
+             ─────────────────────────────────────────────── -->
+
+        <!-- No permite lineas en blanco al inicio o fin de un bloque -->
+        <module name="EmptyLineSeparator">
+            <property name="allowNoEmptyLineBetweenFields" value="true"/>
+            <property name="tokens"
+                      value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF,
+                             STATIC_INIT, INSTANCE_INIT, METHOD_DEF,
+                             CTOR_DEF, VARIABLE_DEF"/>
+        </module>
+
+        <!-- Los arrays deben declararse en estilo Java: String[] args, no String args[] -->
+        <module name="ArrayTypeStyle"/>
+
+        <!-- Detecta el uso de fall-through en switch sin comentario intencional -->
+        <module name="FallThrough"/>
+
+        <!-- Longitud maxima de un metodo: 60 lineas -->
+        <module name="MethodLength">
+            <property name="max" value="60"/>
+        </module>
+
+        <!-- Numero maximo de parametros en un metodo: 7 -->
+        <module name="ParameterNumber">
+            <property name="max" value="7"/>
+        </module>
+
+    </module>
+
+</module>

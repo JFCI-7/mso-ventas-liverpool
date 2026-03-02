@@ -18,7 +18,15 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -86,8 +94,9 @@ public class OrderController {
     }
 
     @GetMapping
-    @Operation(summary = "Listar pedidos o buscar por displayName",
-               description = "Si se provee 'displayName', filtra pedidos cuyos articulos contengan ese nombre (busqueda flexible). Si no, retorna todos los pedidos.")
+    @Operation(
+        summary = "Listar pedidos o buscar por displayName",
+        description = "Si se provee displayName, filtra pedidos por nombre de articulo. Sin parametro retorna todos.")
     @ApiResponse(responseCode = "200", description = "Lista de pedidos obtenida exitosamente")
     public ResponseEntity<?> findOrders(
             @RequestParam(required = false) String displayName) {

@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class CreateCustomerRequest {
-	
+
     @Schema(description = "Nombre(s) del cliente", example = "Juan")
     @NotBlank(message = "El nombre es obligatorio")
     private String firstName;

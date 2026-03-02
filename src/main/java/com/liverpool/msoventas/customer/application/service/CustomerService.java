@@ -2,8 +2,6 @@ package com.liverpool.msoventas.customer.application.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import com.liverpool.msoventas.customer.domain.port.in.CreateCustomerUseCase;
 import com.liverpool.msoventas.customer.domain.port.in.DeleteCustomerUseCase;
 import com.liverpool.msoventas.customer.domain.port.in.GetCustomerUseCase;
@@ -26,10 +24,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CustomerService implements  CreateCustomerUseCase, GetCustomerUseCase,
 UpdateCustomerUseCase, DeleteCustomerUseCase {
-	
-	private final CustomerRepositoryPort repositoryPort;
-	
-	@Override
+
+    private final CustomerRepositoryPort repositoryPort;
+
+    @Override
     public Result<Customer> create(Customer customer) {
         Customer saved = repositoryPort.save(customer);
         return Result.success(saved);

@@ -51,3 +51,6 @@ logs/
 
 ### Docker local ###
 docker-compose.override.yml
+
+### Claude Code ###
+.claude/
