@@ -48,7 +48,7 @@ Antes de clonar y ejecutar el proyecto, asegúrate de tener instalado:
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/REEMPLAZA_CON_TU_USUARIO/mso-ventas-liverpool.git
+git clone https://github.com/JFCI-7/mso-ventas-liverpool.git
 cd mso-ventas-liverpool
 ```
 
