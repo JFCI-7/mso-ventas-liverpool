@@ -375,5 +375,5 @@ docker-compose down
 
 ## Autor
 
-**Jesús Fernando Cruz Islas**
+**Jesus Fernando Cruz Islas**
 Examen técnico — Posición Backend Developer · Liverpool · 2026
