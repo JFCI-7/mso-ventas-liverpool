@@ -11,6 +11,8 @@ Construido con **Spring Boot 4** y **Arquitectura Hexagonal (Ports & Adapters)**
 
 > El video muestra: arranque y funcionamiento de la aplicación.
 
+![Tests](assets/miniatura_youtube.png)
+
 ---
 
 ## Tecnologías y versiones

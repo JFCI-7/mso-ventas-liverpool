@@ -1,9 +1,17 @@
-/* TEAM */
-  Developer: Tu Nombre / @tu_usuario
-  Contact: tu_correo@liverpool.com.mx
-  Location: Ciudad de México, México.
+# humans.txt 
+# Proyecto: Examen Técnico Backend
+# URL: https://github.com/JFCI-7/mso-ventas-liverpool
 
-/* SITE */
-  Last update: 2026/02/27
-  Language: Spanish / Java 21
-  Software: Spring Boot v4.0.3, Springdoc OpenAPI
+/* EQUIPO */
+Desarrollador/Diseñador: Jesus Fernando Cruz Islas
+Email: jesusfernando7ci@gmail.com
+GitHub: https://github.com/JFCI-7
+Ubicación: México - Estado de México
+
+/* TECNOLOGÍAS */
+- Frontend: HTML5, CSS3, JavaScript, React
+- Hosting: Netlify
+- Analítica: Plausible
+
+/* ULTIMA ACTUALIZACIÓN  */
+02/Marzo/2026
