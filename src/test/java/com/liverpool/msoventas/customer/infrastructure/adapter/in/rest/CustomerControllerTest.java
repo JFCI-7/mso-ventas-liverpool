@@ -222,4 +222,60 @@ class CustomerControllerTest {
         mockMvc.perform(delete("/api/v1/customers/notexist"))
                 .andExpect(status().isNotFound());
     }
+    
+    @Test
+    @DisplayName("POST /customers: debe retornar 409 cuando hay conflicto")
+    void create_shouldReturn409_whenConflict() throws Exception {
+        when(createCustomerUseCase.create(any(Customer.class)))
+                .thenReturn(Result.failure("Conflict", ErrorType.CONFLICT));
+
+        String body = """
+                {
+                  "firstName": "Juan",
+                  "lastName": "Perez",
+                  "motherLastName": "Garcia",
+                  "email": "juan@email.com"
+                }
+                """;
+
+        mockMvc.perform(post("/api/v1/customers")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(body))
+                .andExpect(status().isConflict());
+    }
+
+    @Test
+    @DisplayName("POST /customers: debe retornar 500 cuando hay error interno")
+    void create_shouldReturn500_whenInternalError() throws Exception {
+        when(createCustomerUseCase.create(any(Customer.class)))
+                .thenReturn(Result.failure("Error", ErrorType.INTERNAL_ERROR));
+
+        String body = """
+                {
+                  "firstName": "Juan",
+                  "lastName": "Perez",
+                  "motherLastName": "Garcia",
+                  "email": "juan@email.com"
+                }
+                """;
+
+        mockMvc.perform(post("/api/v1/customers")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(body))
+                .andExpect(status().isInternalServerError());
+    }
+    
+    @Test
+    @DisplayName("GET /customers/{id}: debe retornar 400 cuando hay error de validacion")
+    void findById_shouldReturn400_whenValidationError() throws Exception {
+    	when(getCustomerUseCase.findById("abc123"))
+                .thenReturn(Result.failure("Validation error", ErrorType.VALIDATION_ERROR));
+
+        mockMvc.perform(get("/api/v1/customers/abc123"))
+                .andExpect(status().isBadRequest());
+    }
+    
+    
+    
+    
 }

@@ -213,4 +213,64 @@ class DeliveryControllerTest {
         mockMvc.perform(delete("/api/v1/deliveries/notexist"))
                 .andExpect(status().isNotFound());
     }
+    
+    @Test
+    @DisplayName("POST /deliveries: debe retornar 409 cuando hay conflicto")
+    void create_shouldReturn409_whenConflict() throws Exception {
+        when(createDeliveryUseCase.create(any(Delivery.class)))
+                .thenReturn(Result.failure("Conflict", ErrorType.CONFLICT));
+
+        String body = """
+                {
+                  "customerId": "cust_001",
+                  "alias": "Casa",
+                  "street": "Av. Insurgentes Sur 1234",
+                  "colony": "Del Valle",
+                  "city": "Ciudad de Mexico",
+                  "state": "CDMX",
+                  "zipCode": "03100",
+                  "country": "Mexico"
+                }
+                """;
+
+        mockMvc.perform(post("/api/v1/deliveries")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(body))
+                .andExpect(status().isConflict());
+    }
+
+    @Test
+    @DisplayName("POST /deliveries: debe retornar 500 cuando hay error interno")
+    void create_shouldReturn500_whenInternalError() throws Exception {
+        when(createDeliveryUseCase.create(any(Delivery.class)))
+                .thenReturn(Result.failure("Error", ErrorType.INTERNAL_ERROR));
+
+        String body = """
+                {
+                  "customerId": "cust_001",
+                  "alias": "Casa",
+                  "street": "Av. Insurgentes Sur 1234",
+                  "colony": "Del Valle",
+                  "city": "Ciudad de Mexico",
+                  "state": "CDMX",
+                  "zipCode": "03100",
+                  "country": "Mexico"
+                }
+                """;
+
+        mockMvc.perform(post("/api/v1/deliveries")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(body))
+                .andExpect(status().isInternalServerError());
+    }
+    
+    @Test
+    @DisplayName("GET /deliveries/{id}: debe retornar 400 cuando hay error de validacion")
+    void findById_shouldReturn400_whenValidationError() throws Exception {
+        when(getDeliveryUseCase.findById("deliv_001"))
+                .thenReturn(Result.failure("Validation error", ErrorType.VALIDATION_ERROR));
+
+        mockMvc.perform(get("/api/v1/deliveries/deliv_001"))
+                .andExpect(status().isBadRequest());
+    }
 }
