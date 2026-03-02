@@ -9,7 +9,7 @@ Construido con **Spring Boot 4** y **Arquitectura Hexagonal (Ports & Adapters)**
 
 [![Ver demostración en YouTube](https://img.shields.io/badge/▶_Ver_Demo-YouTube-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/watch?v=z8ZOm8tFqOk)
 
-> El video muestra: arranque de la aplicación, pruebas desde Swagger UI, ejecución de los 93 tests y reporte de cobertura JaCoCo.
+> El video muestra: arranque y funcionamiento de la aplicación.
 
 ---
 
