@@ -13,6 +13,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Documento MongoDB que representa un pedido en la coleccion {@code orders}.
+ *
+ * <p>Los campos {@code customerId} y {@code deliveryId} estan indexados para
+ * agilizar las consultas por cliente y por direccion de entrega. El estado del
+ * pedido se almacena como {@code String} para facilitar la serializacion.</p>
+ */
 @Getter
 @Builder
 @AllArgsConstructor

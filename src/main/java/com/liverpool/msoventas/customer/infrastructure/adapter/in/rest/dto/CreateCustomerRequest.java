@@ -5,6 +5,12 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * DTO de entrada para la creacion de un nuevo cliente.
+ *
+ * <p>Contiene las validaciones de Bean Validation que se ejecutan
+ * antes de que el controlador delegue al caso de uso.</p>
+ */
 @Getter
 @NoArgsConstructor
 public class CreateCustomerRequest {

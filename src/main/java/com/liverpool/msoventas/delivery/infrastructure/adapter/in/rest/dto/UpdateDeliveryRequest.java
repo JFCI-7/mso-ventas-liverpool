@@ -4,6 +4,12 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * DTO de entrada para la actualizacion de una direccion de entrega existente.
+ *
+ * <p>No incluye {@code customerId} ya que el cliente propietario de la direccion
+ * no puede modificarse durante una actualizacion (operacion PUT).</p>
+ */
 @Getter
 @NoArgsConstructor
 public class UpdateDeliveryRequest {

@@ -15,6 +15,18 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Servicio de aplicacion que implementa todos los casos de uso del modulo de pedidos.
+ *
+ * <p>No esta anotado con {@code @Service} para mantener el desacoplamiento del framework.
+ * Su instancia es registrada como bean en
+ * {@link com.liverpool.msoventas.order.infrastructure.config.OrderBeanConfig}
+ * siguiendo el patron de Composition Root.</p>
+ *
+ * <p>En {@link #create(Order)} se calcula el total sumando {@code price * quantity}
+ * de cada articulo, y se asigna el estado inicial
+ * {@link com.liverpool.msoventas.order.domain.model.OrderStatus#PENDING}.</p>
+ */
 @RequiredArgsConstructor
 public class OrderService implements
         CreateOrderUseCase,

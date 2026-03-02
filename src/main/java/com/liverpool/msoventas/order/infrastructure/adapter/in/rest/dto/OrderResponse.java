@@ -10,6 +10,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * DTO de salida que representa un pedido en la respuesta HTTP.
+ *
+ * <p>Contiene una clase interna {@link OrderItemResponse} para representar
+ * cada articulo del pedido sin exponer los modelos de dominio ni los documentos
+ * de persistencia.</p>
+ */
 @Getter
 @Builder
 public class OrderResponse {

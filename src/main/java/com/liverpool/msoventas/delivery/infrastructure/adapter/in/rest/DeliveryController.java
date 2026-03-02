@@ -20,6 +20,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Adaptador de entrada REST para el modulo de direcciones de entrega.
+ *
+ * <p>Expone los endpoints bajo {@code /api/v1/deliveries} y delega cada
+ * operacion al caso de uso correspondiente. Traduce el resultado del dominio
+ * al codigo de estado HTTP apropiado mediante {@code resolveStatus}.</p>
+ */
 @RestController
 @RequestMapping("/api/v1/deliveries")
 @RequiredArgsConstructor

@@ -8,6 +8,12 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+/**
+ * DTO de entrada que representa un articulo dentro de la solicitud de creacion de pedido.
+ *
+ * <p>Todos los campos son requeridos; la cantidad debe ser al menos 1 y
+ * el precio no puede ser nulo.</p>
+ */
 @Getter
 @NoArgsConstructor
 public class OrderItemRequest {

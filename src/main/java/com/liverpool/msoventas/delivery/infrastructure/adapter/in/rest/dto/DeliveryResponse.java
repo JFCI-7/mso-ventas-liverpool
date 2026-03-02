@@ -4,6 +4,13 @@ import com.liverpool.msoventas.delivery.domain.model.Delivery;
 import lombok.Builder;
 import lombok.Getter;
 
+/**
+ * DTO de salida que representa una direccion de entrega en la respuesta HTTP.
+ *
+ * <p>Se construye a partir del modelo de dominio mediante el metodo fabrica
+ * {@link #fromDomain(Delivery)}, manteniendo separada la representacion
+ * externa del modelo interno.</p>
+ */
 @Getter
 @Builder
 public class DeliveryResponse {

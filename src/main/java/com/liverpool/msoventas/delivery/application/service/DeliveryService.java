@@ -12,6 +12,14 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
+/**
+ * Servicio de aplicacion que implementa todos los casos de uso de direcciones de entrega.
+ *
+ * <p>No usa {@code @Service} para mantener el desacoplamiento del framework.
+ * Su instancia es registrada como bean en
+ * {@link com.liverpool.msoventas.delivery.infrastructure.config.DeliveryBeanConfig}
+ * siguiendo el patron de Composition Root.</p>
+ */
 @RequiredArgsConstructor
 public class DeliveryService implements
         CreateDeliveryUseCase,

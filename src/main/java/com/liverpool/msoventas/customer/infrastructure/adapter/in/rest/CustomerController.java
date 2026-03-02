@@ -23,6 +23,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Adaptador de entrada REST para el modulo de clientes.
+ *
+ * <p>Expone los endpoints bajo {@code /api/v1/customers} y delega cada
+ * operacion al caso de uso correspondiente. Traduce el resultado del dominio
+ * ({@link com.liverpool.msoventas.shared.domain.model.Result}) al codigo
+ * de estado HTTP apropiado mediante {@code resolveStatus}.</p>
+ */
 @RestController
 @RequestMapping("/api/v1/customers")
 @RequiredArgsConstructor

@@ -11,6 +11,14 @@ import java.text.Normalizer;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Adaptador de salida que implementa {@link OrderRepositoryPort} usando MongoDB.
+ *
+ * <p>Traduce entre el modelo de dominio {@link Order} y el documento de persistencia
+ * {@link OrderDocument}. Incluye la logica de normalizacion de texto para habilitar
+ * la busqueda flexible por nombre de articulo: convierte a minusculas, elimina acentos
+ * mediante NFD y remueve caracteres de puntuacion.</p>
+ */
 @Component
 @RequiredArgsConstructor
 public class OrderMongoAdapter implements OrderRepositoryPort {

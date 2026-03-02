@@ -8,6 +8,13 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Adaptador de salida que implementa {@link DeliveryRepositoryPort} usando MongoDB.
+ *
+ * <p>Traduce entre el modelo de dominio {@link Delivery} y el documento
+ * de persistencia {@link DeliveryDocument}, aislando la capa de dominio
+ * de la tecnologia de base de datos.</p>
+ */
 @Component
 @RequiredArgsConstructor
 public class DeliveryMongoAdapter implements DeliveryRepositoryPort {

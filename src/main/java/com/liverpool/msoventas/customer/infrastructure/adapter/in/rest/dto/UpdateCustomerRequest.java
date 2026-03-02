@@ -5,6 +5,12 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * DTO de entrada para la actualizacion de un cliente existente.
+ *
+ * <p>Todos los campos son requeridos: una actualizacion reemplaza
+ * completamente los datos del cliente (operacion PUT).</p>
+ */
 @Getter
 @NoArgsConstructor
 public class UpdateCustomerRequest {

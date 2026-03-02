@@ -7,6 +7,13 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+/**
+ * Objeto de valor que representa un articulo dentro de un pedido.
+ *
+ * <p>Incluye el codigo de producto, nombre para mostrar, cantidad y precio
+ * unitario. El total de la linea se calcula multiplicando {@code price} por
+ * {@code quantity} en la capa de aplicacion.</p>
+ */
 @Getter
 @Builder
 @AllArgsConstructor

@@ -9,6 +9,12 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
+/**
+ * Documento MongoDB que representa una direccion de entrega en la coleccion {@code deliveries}.
+ *
+ * <p>El campo {@code customerId} esta indexado para agilizar las consultas
+ * por cliente sin necesidad de un scan completo de la coleccion.</p>
+ */
 @Getter
 @Builder
 @AllArgsConstructor

@@ -11,6 +11,13 @@ import com.liverpool.msoventas.customer.domain.port.out.CustomerRepositoryPort;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Adaptador de salida que implementa {@link CustomerRepositoryPort} usando MongoDB.
+ *
+ * <p>Traduce entre el modelo de dominio {@link Customer} y el documento
+ * de persistencia {@link CustomerDocument}, manteniendo la capa de dominio
+ * libre de dependencias de Spring Data.</p>
+ */
 @Component
 @RequiredArgsConstructor
 public class CustomerMongoAdapter implements CustomerRepositoryPort {

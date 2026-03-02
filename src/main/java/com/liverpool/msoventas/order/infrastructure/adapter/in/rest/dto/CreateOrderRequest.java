@@ -10,6 +10,13 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * DTO de entrada para la creacion de un nuevo pedido.
+ *
+ * <p>La lista de articulos debe contener al menos un elemento y cada articulo
+ * se valida en cascada mediante {@code @Valid}. El total no se recibe del cliente;
+ * es calculado por la capa de aplicacion.</p>
+ */
 @Getter
 @NoArgsConstructor
 public class CreateOrderRequest {

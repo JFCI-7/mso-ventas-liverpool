@@ -5,6 +5,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * Entidad de dominio que representa a un cliente del sistema.
+ *
+ * <p>Contiene los datos de identificacion y contacto del cliente.
+ * No depende de ningun framework de infraestructura; es un POJO puro
+ * gestionado unicamente por la logica de negocio.</p>
+ */
 @Getter
 @Builder
 @AllArgsConstructor

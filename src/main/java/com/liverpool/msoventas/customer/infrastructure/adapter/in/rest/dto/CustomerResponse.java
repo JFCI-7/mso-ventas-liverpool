@@ -5,6 +5,12 @@ import com.liverpool.msoventas.customer.domain.model.Customer;
 import lombok.Builder;
 import lombok.Getter;
 
+/**
+ * DTO de salida que representa la informacion de un cliente en la respuesta HTTP.
+ *
+ * <p>Expone unicamente los campos relevantes para el consumidor de la API,
+ * desacoplando la representacion externa del modelo de dominio interno.</p>
+ */
 @Getter
 @Builder
 public class CustomerResponse {

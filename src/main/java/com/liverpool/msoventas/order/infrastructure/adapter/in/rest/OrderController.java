@@ -21,6 +21,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Adaptador de entrada REST para el modulo de pedidos.
+ *
+ * <p>Expone los endpoints bajo {@code /api/v1/orders}. El endpoint
+ * {@code GET /api/v1/orders} acepta el parametro opcional {@code displayName}
+ * para realizar busqueda flexible por nombre de articulo; si no se proporciona,
+ * retorna todos los pedidos.</p>
+ */
 @RestController
 @RequestMapping("/api/v1/orders")
 @RequiredArgsConstructor

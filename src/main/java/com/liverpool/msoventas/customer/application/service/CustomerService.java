@@ -15,6 +15,14 @@ import com.liverpool.msoventas.customer.domain.model.Customer;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Servicio de aplicacion que implementa todos los casos de uso relacionados con clientes.
+ *
+ * <p>No esta anotado con {@code @Service} de Spring para mantener el desacoplamiento
+ * de la capa de dominio/aplicacion respecto al framework. En su lugar, la instancia
+ * es registrada como bean en {@link com.liverpool.msoventas.customer.infrastructure.config.CustomerBeanConfig},
+ * siguiendo el patron de Composition Root.</p>
+ */
 @RequiredArgsConstructor
 public class CustomerService implements  CreateCustomerUseCase, GetCustomerUseCase,
 UpdateCustomerUseCase, DeleteCustomerUseCase {

@@ -7,6 +7,12 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+/**
+ * Subdocumento MongoDB embebido en {@link OrderDocument} que representa un articulo del pedido.
+ *
+ * <p>El campo {@code displayNameNormalized} almacena el nombre del articulo en minusculas
+ * y sin acentos, habilitando la busqueda flexible mediante expresiones regulares en MongoDB.</p>
+ */
 @Getter
 @Builder
 @AllArgsConstructor

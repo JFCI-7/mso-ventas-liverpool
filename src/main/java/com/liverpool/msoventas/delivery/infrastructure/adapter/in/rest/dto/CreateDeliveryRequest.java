@@ -4,6 +4,12 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * DTO de entrada para la creacion de una nueva direccion de entrega.
+ *
+ * <p>Todos los campos son obligatorios. Las validaciones se ejecutan mediante
+ * Bean Validation antes de que el controlador delegue al caso de uso.</p>
+ */
 @Getter
 @NoArgsConstructor
 public class CreateDeliveryRequest {

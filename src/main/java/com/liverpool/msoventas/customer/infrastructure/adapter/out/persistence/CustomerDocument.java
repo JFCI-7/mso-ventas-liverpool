@@ -8,6 +8,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * Documento MongoDB que representa a un cliente en la coleccion {@code customers}.
+ *
+ * <p>Es el objeto de persistencia de la capa de infraestructura; no debe
+ * utilizarse fuera del paquete de adaptadores de salida. El campo {@code email}
+ * tiene un indice unico para evitar registros duplicados.</p>
+ */
 @Getter
 @Builder
 @AllArgsConstructor
